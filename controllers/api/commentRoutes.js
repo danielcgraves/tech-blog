@@ -1,27 +1,30 @@
 const router = require('express').Router();
-const { Blog } = require('../../models');
+const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
 	try {
-		const newBlog = await Blog.create({
-			...req.body,
+		const newComment = await Comment.create({
+			comment_text: req.body.comment_text,
+			blog_id: req.body.blog_id,
 			user_id: req.session.user_id,
 		});
-
-		res.status(200).json(newBlog);
+		console.log(comment_text);
+		res.status(200).json(newComment);
 	} catch (err) {
+		console.log(err);
 		res.status(400).json(err);
 	}
 });
 
 router.get('/', async (req, res) => {
 	try {
-		const blogData = await Blog.findAll({
+		const commentData = await Comment.findAll({
+			limit: 3,
 			order: [['id', 'DESC']],
 		});
 
-		res.status(200).json(blogData);
+		res.status(200).json(commentData);
 	} catch (err) {
 		res.status(500).json(err);
 	}
@@ -29,19 +32,19 @@ router.get('/', async (req, res) => {
 
 router.delete('/:id', withAuth, async (req, res) => {
 	try {
-		const blogData = await Blog.destroy({
+		const commentData = await Comment.destroy({
 			where: {
 				id: req.params.id,
 				user_id: req.session.user_id,
 			},
 		});
 
-		if (!blogData) {
+		if (!commentData) {
 			res.status(404).json({ message: 'No blog found with this id!' });
 			return;
 		}
 
-		res.status(200).json(blogData);
+		res.status(200).json(commentData);
 	} catch (err) {
 		res.status(500).json(err);
 	}
