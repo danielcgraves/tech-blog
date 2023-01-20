@@ -3,19 +3,13 @@
 	<p>{{description}}</p>
 	<p>Created by {{user.name}} on {{format_date date_created}}</p>
 	<form id='comment-form'>
-		<textarea placeholder='Leave A Comment!' id='comment-input'></textarea><br />
+		<textarea
+			placeholder='Leave A Comment!'
+			id='comment-input'
+			name='comment-input'
+		></textarea><br />
 		<button class='btn btn-primary' type='submit'>Leave A Comment</button>
 	</form>
-
-	{{#if blogs.comment}}
-		{{#each blogs.comment}}
-			<div>
-				<p>
-					{{body}}
-				</p>
-			</div>
-		{{/each}}
-	{{/if}}
 
 </div>
 

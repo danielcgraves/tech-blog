@@ -1,0 +1,27 @@
+* {
+	background-color: lightblue;
+}
+
+a {
+	color: black;
+}
+
+h1 a {
+	color: lightskyblue;
+	text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+}
+
+nav a {
+	padding-right: 2rem;
+}
+
+.blog {
+	justify-content: center;
+	text-align: center;
+}
+
+.description p {
+	background-color: white;
+	padding: 1rem;
+	border-radius: 8px;
+}
